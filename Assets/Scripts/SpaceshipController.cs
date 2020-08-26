@@ -29,6 +29,8 @@ public class SpaceshipController : MonoBehaviour
     public GameObject player;
     public GameObject spaceshipCamera;
 
+    public GameObject spaceshipStats;
+
     public void CameraRotation() {
        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
        verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
@@ -41,7 +43,10 @@ public class SpaceshipController : MonoBehaviour
 
            //Jumping//
            float addJumpForce = 0f;
-           if (Input.GetButton("Jump")) { addJumpForce = jumpForce; }
+           if (Input.GetButton("Jump") && spaceshipStats.GetComponent<FlightController>().currentStatus > 0) { 
+               addJumpForce = jumpForce;
+               spaceshipStats.GetComponent<FlightController>().changeStatus(35*Time.deltaTime);
+           }
 
            //Flat Directional Movement//
            Vector3 moveDir = new Vector3(
@@ -137,6 +142,9 @@ public class SpaceshipController : MonoBehaviour
        }
    }
 
+   private void OnAwake () {
+       spaceshipStats = GameObject.FindGameObjectWithTag("SpaceshipStats");
+   }
     // Update is called once per frame
     private void Update() {
         SpaceshipInteraction();

@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
    public Rigidbody rb;
    public GameObject myCamera;
    public GameObject orbitPoint;
+   
+   //Jetpack//
+   public GameObject jetpackSlider;
 
    //Core Functions//
    public void CameraRotation() {
@@ -42,7 +45,10 @@ public class PlayerController : MonoBehaviour
 
            //Jumping//
            float addJumpForce = 0f;
-           if (Input.GetButton("Jump")) { addJumpForce = jumpForce; }
+           if (Input.GetButton("Jump") && jetpackSlider.GetComponent<FlightController>().currentStatus > 0) { 
+               addJumpForce = jumpForce; 
+               jetpackSlider.GetComponent<FlightController>().changeStatus(20 * Time.deltaTime);
+            }
 
            //Flat Directional Movement//
            Vector3 moveDir = new Vector3(
@@ -123,6 +129,9 @@ public class PlayerController : MonoBehaviour
        return Vector3.Distance(outerPoint, gameObject.transform.position);
    }
 
+   private void Awake () {
+       jetpackSlider = GameObject.FindGameObjectWithTag("healthBar");
+   }
    //Implimentation//
    private void Update() {
        CameraRotation();

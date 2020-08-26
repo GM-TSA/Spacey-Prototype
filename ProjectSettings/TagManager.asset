@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Planet
   - NotPlanet
+  - healthBar
+  - SpaceshipStats
   layers:
   - Default
   - TransparentFX
