@@ -92,10 +92,10 @@ public class SpaceshipController : MonoBehaviour
            Vector3 targetDir = (gameObject.transform.position - orbitPoint.transform.position).normalized;
            float distToSurface = DistanceBetween(orbitPoint);
 
-           if (distToSurface > 2 && distToSurface < 150) {
-               gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, Quaternion.FromToRotation(gameObject.transform.up, targetDir) * gameObject.transform.rotation, 1f * Time.deltaTime);
+           if (distToSurface > 4.5 && distToSurface < 150) {
+               gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, Quaternion.FromToRotation(gameObject.transform.up, targetDir) * gameObject.transform.rotation, 2f * Time.deltaTime);
            }
-           else if (distToSurface < 2) {
+           else if (distToSurface < 4.5) {
                isGrounded = true;
            }
        }

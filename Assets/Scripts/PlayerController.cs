@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
    //Jetpack//
    public GameObject jetpackSlider;
 
+   //Character Activation (For Interactions)//
+   public bool isActive = true;
+
    //Core Functions//
    public void CameraRotation() {
        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
@@ -39,7 +42,7 @@ public class PlayerController : MonoBehaviour
        myCamera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
    }
    public void ControllerMovement() {
-       if (isGrounded) {
+       if (isGrounded && isActive) {
            //Sprinting//
            if (Input.GetButton("Run")) { currentMoveSpeed = sprintSpeed; } else { currentMoveSpeed = moveSpeed; }
 
